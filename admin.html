@@ -293,6 +293,8 @@ body {
 <button class="tab" onclick="showTab('classes')">Lezioni</button>
 <button class="tab" onclick="showTab('bookings')">Prenotazioni</button>
 <button class="tab" onclick="showTab('content')">Contenuti</button>
+<button class="tab" onclick="showTab('styles')">Stili Yoga</button>
+<button class="tab" onclick="showTab('testimonials')">Testimonial</button>
 </div>
 
 <div class="content">
@@ -414,69 +416,111 @@ body {
 <form id="homepageForm">
 <div class="form-group">
 <label>Titolo Principale</label>
-<input type="text" id="homeTitle" value="Centro Yoga Roma - Trova il tuo equilibrio">
+<input type="text" id="homeTitle" placeholder="es. Centro Yoga Roma">
 </div>
 <div class="form-group">
 <label>Sottotitolo</label>
-<textarea id="homeSubtitle">Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi per tutti i livelli.</textarea>
+<textarea id="homeSubtitle" placeholder="es. Trova il tuo equilibrio"></textarea>
 </div>
-<button type="submit" class="btn btn-primary">Salva Homepage</button>
+<div class="form-group">
+<label>Descrizione Hero</label>
+<textarea id="homeDescription" placeholder="Descrizione della sezione iniziale..."></textarea>
+</div>
+<div class="form-group">
+<label>Titolo Sezione Stili</label>
+<input type="text" id="homeStylesTitle" placeholder="es. I Nostri Stili di Yoga">
+</div>
+<div class="form-group">
+<label>Sottotitolo Sezione Stili</label>
+<textarea id="homeStylesSubtitle" placeholder="es. Trova la pratica perfetta per te."></textarea>
+</div>
+<div class="form-group">
+<label>Titolo Sezione Testimonial</label>
+<input type="text" id="homeTestimonialsTitle" placeholder="es. Cosa Dicono di Noi">
+</div>
+<div class="form-group">
+<label>Titolo Sezione Orario</label>
+<input type="text" id="homeScheduleTitle" placeholder="es. Orario dei Corsi">
+</div>
+<div class="form-group">
+<label>Sottotitolo Sezione Orario</label>
+<textarea id="homeScheduleSubtitle" placeholder="es. Un'anteprima delle nostre lezioni settimanali."></textarea>
+</div>
+<button type="submit" class="btn btn-primary">Salva Contenuti Homepage</button>
 </form>
 </div>
 
 <div class="card">
-<h3>Informazioni Contatto</h3>
-<form id="contactForm">
-<div class="grid-2">
+<h3>Informazioni Contatto e Footer</h3>
+<form id="footerForm">
 <div class="form-group">
 <label>Indirizzo</label>
-<input type="text" id="contactAddress" value="Via dei Fiori, 12, Roma">
+<input type="text" id="footerAddress" placeholder="es. Via dei Fiori, 12, Roma">
 </div>
 <div class="form-group">
 <label>Telefono</label>
-<input type="tel" id="contactPhone" value="+39 06 1234 5678">
+<input type="tel" id="footerPhone" placeholder="es. +39 06 1234 5678">
 </div>
-</div>
-<div class="grid-2">
 <div class="form-group">
 <label>Email</label>
-<input type="email" id="contactEmail" value="info@centroyogaroma.it">
+<input type="email" id="footerEmail" placeholder="es. info@centroyogaroma.it">
 </div>
 <div class="form-group">
-<label>Orari Apertura</label>
-<input type="text" id="contactHours" value="Lun-Ven: 8:00-20:00">
+<label>Testo Copyright</label>
+<input type="text" id="footerCopyright" placeholder="es. © 2025 Centro Yoga Roma. Tutti i diritti riservati.">
 </div>
-</div>
-<button type="submit" class="btn btn-primary">Salva Contatti</button>
+<button type="submit" class="btn btn-primary">Salva Contenuti Footer</button>
 </form>
+</div>
 </div>
 
+<div id="styles" class="section">
+<h2 style="margin-bottom: 20px;">Gestione Stili di Yoga</h2>
+<div id="stylesAlert" class="hidden"></div>
 <div class="card">
-<h3>Prezzi</h3>
-<form id="pricingForm">
-<div class="grid-2">
-<div class="form-group">
-<label>Lezione Singola (€)</label>
-<input type="number" id="priceSingle" value="20" step="0.01">
+    <h3>Aggiungi Nuovo Stile</h3>
+    <form id="styleForm">
+        <div class="form-group">
+            <label>Nome Stile</label>
+            <input type="text" id="styleName" placeholder="es. Hatha Yoga" required>
+        </div>
+        <div class="form-group">
+            <label>Descrizione</label>
+            <textarea id="styleDescription" placeholder="Una pratica dolce..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Salva Stile</button>
+    </form>
 </div>
-<div class="form-group">
-<label>Abbonamento Mensile (€)</label>
-<input type="number" id="priceMonthly" value="80" step="0.01">
-</div>
-</div>
-<div class="grid-2">
-<div class="form-group">
-<label>Abbonamento Trimestrale (€)</label>
-<input type="number" id="priceQuarterly" value="210" step="0.01">
-</div>
-<div class="form-group">
-<label>Pacchetto 10 Lezioni (€)</label>
-<input type="number" id="price10Pack" value="180" step="0.01">
+<div class="card">
+    <h3>Stili Attivi</h3>
+    <div id="stylesList" class="loading">Caricamento stili...</div>
 </div>
 </div>
-<button type="submit" class="btn btn-primary">Salva Prezzi</button>
-</form>
+
+<div id="testimonials" class="section">
+<h2 style="margin-bottom: 20px;">Gestione Testimonial</h2>
+<div id="testimonialsAlert" class="hidden"></div>
+<div class="card">
+    <h3>Aggiungi Nuova Testimonianza</h3>
+    <form id="testimonialForm">
+        <div class="form-group">
+            <label>Autore</label>
+            <input type="text" id="testimonialAuthor" placeholder="es. Sofia Rossi" required>
+        </div>
+        <div class="form-group">
+            <label>Testo</label>
+            <textarea id="testimonialQuote" placeholder="Il Centro Yoga Roma è..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Salva Testimonianza</button>
+    </form>
 </div>
+<div class="card">
+    <h3>Testimonial Attivi</h3>
+    <div id="testimonialsList" class="loading">Caricamento testimonianze...</div>
+</div>
+</div>
+
+
 </div>
 </div>
 </div>
@@ -508,6 +552,7 @@ auth.onAuthStateChanged(user => {
         // Utente loggato, mostra il contenuto
         mainContent.style.display = 'block';
         logoutButton.style.display = 'block';
+        loadAllData(); // Carica tutti i dati al login
     } else {
         // Utente non loggato, reindirizza o chiedi login
         mainContent.style.display = 'none';
@@ -533,6 +578,15 @@ document.getElementById('logout-button').addEventListener('click', () => {
     });
 });
 
+function loadAllData() {
+    loadDashboard();
+    loadClasses();
+    loadBookings();
+    loadContentForms();
+    loadStyles();
+    loadTestimonials();
+}
+
 // Gestione Tab
 function showTab(tabName) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -543,6 +597,9 @@ function showTab(tabName) {
     if (tabName === 'classes') loadClasses();
     if (tabName === 'bookings') loadBookings();
     if (tabName === 'dashboard') loadDashboard();
+    if (tabName === 'content') loadContentForms();
+    if (tabName === 'styles') loadStyles();
+    if (tabName === 'testimonials') loadTestimonials();
 }
 
 function showAlert(elementId, message, type) {
@@ -622,6 +679,7 @@ async function deleteClass(id) {
         await db.collection('classes').doc(id).delete();
         showAlert('classAlert', 'Lezione eliminata!', 'success');
         loadClasses();
+        loadDashboard();
     } catch (error) {
         showAlert('classAlert', 'Errore: ' + error.message, 'error');
     }
@@ -708,58 +766,187 @@ async function loadDashboard() {
 }
 
 // GESTIONE CONTENUTI
+async function loadContentForms() {
+    try {
+        const homepageDoc = await db.collection('settings').doc('homepage').get();
+        if (homepageDoc.exists) {
+            const data = homepageDoc.data();
+            document.getElementById('homeTitle').value = data.title || '';
+            document.getElementById('homeSubtitle').value = data.subtitle || '';
+            document.getElementById('homeDescription').value = data.description || '';
+            document.getElementById('homeStylesTitle').value = data.stylesTitle || '';
+            document.getElementById('homeStylesSubtitle').value = data.stylesSubtitle || '';
+            document.getElementById('homeTestimonialsTitle').value = data.testimonialsTitle || '';
+            document.getElementById('homeScheduleTitle').value = data.scheduleTitle || '';
+            document.getElementById('homeScheduleSubtitle').value = data.scheduleSubtitle || '';
+        }
+        
+        const footerDoc = await db.collection('settings').doc('footer').get();
+        if (footerDoc.exists) {
+            const data = footerDoc.data();
+            document.getElementById('footerAddress').value = data.address || '';
+            document.getElementById('footerPhone').value = data.phone || '';
+            document.getElementById('footerEmail').value = data.email || '';
+            document.getElementById('footerCopyright').value = data.copyright || '';
+        }
+    } catch (error) {
+        console.error("Errore nel caricamento dei contenuti:", error);
+    }
+}
+
 document.getElementById('homepageForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     try {
         await db.collection('settings').doc('homepage').set({
             title: document.getElementById('homeTitle').value,
             subtitle: document.getElementById('homeSubtitle').value,
+            description: document.getElementById('homeDescription').value,
+            stylesTitle: document.getElementById('homeStylesTitle').value,
+            stylesSubtitle: document.getElementById('homeStylesSubtitle').value,
+            testimonialsTitle: document.getElementById('homeTestimonialsTitle').value,
+            scheduleTitle: document.getElementById('homeScheduleTitle').value,
+            scheduleSubtitle: document.getElementById('homeScheduleSubtitle').value,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        showAlert('contentAlert', 'Homepage aggiornata!', 'success');
+        }, { merge: true });
+        showAlert('contentAlert', 'Contenuti homepage aggiornati!', 'success');
     } catch (error) {
         showAlert('contentAlert', 'Errore: ' + error.message, 'error');
     }
 });
 
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
+document.getElementById('footerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     try {
-        await db.collection('settings').doc('contact').set({
-            address: document.getElementById('contactAddress').value,
-            phone: document.getElementById('contactPhone').value,
-            email: document.getElementById('contactEmail').value,
-            hours: document.getElementById('contactHours').value,
+        await db.collection('settings').doc('footer').set({
+            address: document.getElementById('footerAddress').value,
+            phone: document.getElementById('footerPhone').value,
+            email: document.getElementById('footerEmail').value,
+            copyright: document.getElementById('footerCopyright').value,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        showAlert('contentAlert', 'Contatti aggiornati!', 'success');
+        }, { merge: true });
+        showAlert('contentAlert', 'Contenuti footer aggiornati!', 'success');
     } catch (error) {
         showAlert('contentAlert', 'Errore: ' + error.message, 'error');
     }
 });
 
-document.getElementById('pricingForm').addEventListener('submit', async function(e) {
+// GESTIONE STILI DI YOGA
+document.getElementById('styleForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+    const styleData = {
+        name: document.getElementById('styleName').value,
+        description: document.getElementById('styleDescription').value,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
     try {
-        await db.collection('settings').doc('pricing').set({
-            single: parseFloat(document.getElementById('priceSingle').value),
-            monthly: parseFloat(document.getElementById('priceMonthly').value),
-            quarterly: parseFloat(document.getElementById('priceQuarterly').value),
-            pack10: parseFloat(document.getElementById('price10Pack').value),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        showAlert('contentAlert', 'Prezzi aggiornati!', 'success');
+        await db.collection('yogaStyles').add(styleData);
+        showAlert('stylesAlert', 'Stile di yoga aggiunto!', 'success');
+        this.reset();
+        loadStyles();
     } catch (error) {
-        showAlert('contentAlert', 'Errore: ' + error.message, 'error');
+        showAlert('stylesAlert', 'Errore: ' + error.message, 'error');
     }
 });
 
-// Carica dashboard all'avvio
-auth.onAuthStateChanged(user => {
-    if (user) {
-        loadDashboard();
+async function loadStyles() {
+    const list = document.getElementById('stylesList');
+    list.innerHTML = '<div class="loading">Caricamento...</div>';
+    try {
+        const snapshot = await db.collection('yogaStyles').get();
+        if (snapshot.empty) {
+            list.innerHTML = '<p style="text-align:center; color:#666;">Nessuno stile di yoga trovato.</p>';
+            return;
+        }
+        list.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `
+                <div class="item-info">
+                    <h4>${data.name}</h4>
+                    <p>${data.description}</p>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-danger" onclick="deleteStyle('${doc.id}')">Elimina</button>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    } catch (error) {
+        list.innerHTML = '<p style="color:red;">Errore: ' + error.message + '</p>';
+    }
+}
+
+async function deleteStyle(id) {
+    if (!confirm('Sei sicuro di voler eliminare questo stile?')) return;
+    try {
+        await db.collection('yogaStyles').doc(id).delete();
+        showAlert('stylesAlert', 'Stile eliminato!', 'success');
+        loadStyles();
+    } catch (error) {
+        showAlert('stylesAlert', 'Errore: ' + error.message, 'error');
+    }
+}
+
+// GESTIONE TESTIMONIAL
+document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const testimonialData = {
+        author: document.getElementById('testimonialAuthor').value,
+        quote: document.getElementById('testimonialQuote').value,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    try {
+        await db.collection('testimonials').add(testimonialData);
+        showAlert('testimonialsAlert', 'Testimonianza aggiunta!', 'success');
+        this.reset();
+        loadTestimonials();
+    } catch (error) {
+        showAlert('testimonialsAlert', 'Errore: ' + error.message, 'error');
     }
 });
+
+async function loadTestimonials() {
+    const list = document.getElementById('testimonialsList');
+    list.innerHTML = '<div class="loading">Caricamento...</div>';
+    try {
+        const snapshot = await db.collection('testimonials').get();
+        if (snapshot.empty) {
+            list.innerHTML = '<p style="text-align:center; color:#666;">Nessuna testimonianza trovata.</p>';
+            return;
+        }
+        list.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `
+                <div class="item-info">
+                    <h4>${data.author}</h4>
+                    <p>${data.quote}</p>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-danger" onclick="deleteTestimonial('${doc.id}')">Elimina</button>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    } catch (error) {
+        list.innerHTML = '<p style="color:red;">Errore: ' + error.message + '</p>';
+    }
+}
+
+async function deleteTestimonial(id) {
+    if (!confirm('Sei sicuro di voler eliminare questa testimonianza?')) return;
+    try {
+        await db.collection('testimonials').doc(id).delete();
+        showAlert('testimonialsAlert', 'Testimonianza eliminata!', 'success');
+        loadTestimonials();
+    } catch (error) {
+        showAlert('testimonialsAlert', 'Errore: ' + error.message, 'error');
+    }
+}
 </script>
 
 </body>
