@@ -9,6 +9,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+  .edit-icon {
+    display: none;
+    cursor: pointer;
+    margin-left: 8px;
+    vertical-align: middle;
+    color: #667eea;
+  }
+</style>
 <script>
     tailwind.config = {
       darkMode: "class",
@@ -49,7 +58,7 @@
 <a class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#insegnanti">Insegnanti</a>
 <a class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#prezzi">Prezzi</a>
 <a class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="contatti.html">Contatti</a>
-<a class="ml-4 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-transform hover:scale-105" href="prenota.html">Prenota</a>
+<button id="auth-button" class="ml-4 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-transform hover:scale-105">Accedi Admin</button>
 </nav>
 <button class="lg:hidden p-2 rounded-md text-slate-700 dark:text-slate-300 hover:bg-primary/20 dark:hover:bg-primary/30" id="mobile-menu-button">
 <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -66,11 +75,24 @@
 <div class="absolute inset-0 bg-black/50"></div>
 <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1600");'></div>
 <div class="relative z-10 mx-auto max-w-4xl px-4 text-center text-white">
+<div class="inline-flex items-center">
 <h1 id="hero-title" class="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">Caricamento...</h1>
+<span class="edit-icon" id="hero-title-edit-icon" onclick="toggleEdit('hero-title')">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.5 2.5a.75.75 0 0 0 .929.929l2.5-.5a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" /></svg>
+</span>
+</div>
+<div class="inline-flex items-center">
 <p id="hero-subtitle" class="mt-4 text-2xl font-semibold sm:text-3xl">...</p>
-<p id="hero-description" class="mt-6 max-w-2xl mx-auto text-lg text-slate-200">
-Caricamento descrizione...
-</p>
+<span class="edit-icon" id="hero-subtitle-edit-icon" onclick="toggleEdit('hero-subtitle')">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.5 2.5a.75.75 0 0 0 .929.929l2.5-.5a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" /></svg>
+</span>
+</div>
+<div class="inline-flex items-center">
+<p id="hero-description" class="mt-6 max-w-2xl mx-auto text-lg text-slate-200">Caricamento descrizione...</p>
+<span class="edit-icon" id="hero-description-edit-icon" onclick="toggleEdit('hero-description')">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.5 2.5a.75.75 0 0 0 .929.929l2.5-.5a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" /></svg>
+</span>
+</div>
 <a class="mt-8 inline-block rounded-full bg-primary px-8 py-3 text-lg font-bold text-white shadow-lg transition-transform hover:scale-105" href="prenota.html">Prenota Ora</a>
 </div>
 </section>
@@ -225,8 +247,44 @@ Caricamento descrizione...
   
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
+  const auth = firebase.auth();
   
   console.log('Firebase connesso con successo!');
+
+  // Contenuti dinamici
+  const contentMap = {
+    'hero-title': 'homepage',
+    'hero-subtitle': 'homepage',
+    'hero-description': 'homepage',
+  };
+
+  function toggleEdit(elementId) {
+    const element = document.getElementById(elementId);
+    if (element.getAttribute('contenteditable') === 'true') {
+      element.contentEditable = "false";
+      element.style.outline = 'none';
+      saveContent(elementId, element.textContent);
+    } else {
+      element.contentEditable = "true";
+      element.style.outline = '2px solid #667eea';
+      element.focus();
+    }
+  }
+
+  async function saveContent(elementId, content) {
+    const docRef = contentMap[elementId];
+    if (docRef) {
+      const fieldName = elementId.split('-')[1];
+      const dataToUpdate = {};
+      dataToUpdate[fieldName] = content;
+      try {
+        await db.collection('settings').doc(docRef).update(dataToUpdate);
+        console.log('Contenuto salvato con successo:', dataToUpdate);
+      } catch (error) {
+        console.error('Errore nel salvataggio:', error);
+      }
+    }
+  }
 
   async function loadHomepageContent() {
     try {
@@ -235,7 +293,7 @@ Caricamento descrizione...
         const data = homepageDoc.data();
         document.getElementById('hero-title').textContent = data.title;
         document.getElementById('hero-subtitle').textContent = data.subtitle;
-        document.getElementById('hero-description').textContent = data.description || '';
+        document.getElementById('hero-description').textContent = data.description;
       }
     } catch (error) {
       console.error("Errore nel caricamento dei contenuti della homepage:", error);
@@ -273,6 +331,32 @@ Caricamento descrizione...
   document.addEventListener('DOMContentLoaded', function() {
     loadHomepageContent();
     loadClassesTable();
+  });
+
+  // Funzioni di autenticazione e UI
+  auth.onAuthStateChanged(user => {
+    const authButton = document.getElementById('auth-button');
+    const editIcons = document.querySelectorAll('.edit-icon');
+
+    if (user) {
+      // Utente loggato
+      authButton.textContent = 'Esci';
+      authButton.onclick = () => auth.signOut();
+      editIcons.forEach(icon => icon.style.display = 'inline-block');
+    } else {
+      // Utente non loggato
+      authButton.textContent = 'Accedi Admin';
+      authButton.onclick = () => {
+        const email = prompt("Inserisci la tua email:");
+        const password = prompt("Inserisci la password:");
+        if (email && password) {
+          auth.signInWithEmailAndPassword(email, password)
+            .then(() => alert('Accesso riuscito!'))
+            .catch(error => alert('Errore di accesso: ' + error.message));
+        }
+      };
+      editIcons.forEach(icon => icon.style.display = 'none');
+    }
   });
 </script>
 
