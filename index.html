@@ -36,7 +36,6 @@
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
 
-<!-- HEADER -->
 <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-primary/20 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:bg-background-dark/80 sm:px-6 lg:px-8">
 <div class="flex items-center gap-3">
 <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -61,24 +60,21 @@
 </button>
 </header>
 
-<!-- MAIN CONTENT -->
 <main class="flex-1">
 
-<!-- HERO SECTION -->
 <section class="relative flex min-h-[60vh] items-center justify-center bg-cover bg-center py-20 md:min-h-[80vh]">
 <div class="absolute inset-0 bg-black/50"></div>
 <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1600");'></div>
 <div class="relative z-10 mx-auto max-w-4xl px-4 text-center text-white">
-<h1 class="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">Centro Yoga Roma</h1>
-<p class="mt-4 text-2xl font-semibold sm:text-3xl">Trova il tuo equilibrio</p>
-<p class="mt-6 max-w-2xl mx-auto text-lg text-slate-200">
-Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi per tutti i livelli, dai principianti agli esperti.
+<h1 id="hero-title" class="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">Caricamento...</h1>
+<p id="hero-subtitle" class="mt-4 text-2xl font-semibold sm:text-3xl">...</p>
+<p id="hero-description" class="mt-6 max-w-2xl mx-auto text-lg text-slate-200">
+Caricamento descrizione...
 </p>
 <a class="mt-8 inline-block rounded-full bg-primary px-8 py-3 text-lg font-bold text-white shadow-lg transition-transform hover:scale-105" href="prenota.html">Prenota Ora</a>
 </div>
 </section>
 
-<!-- STILI DI YOGA -->
 <section class="py-16 sm:py-24">
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 <div class="text-center">
@@ -120,7 +116,6 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
 </div>
 </section>
 
-<!-- TESTIMONIAL -->
 <section class="py-16 sm:py-24 bg-white dark:bg-background-dark">
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 <div class="text-center">
@@ -152,7 +147,6 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
 </div>
 </section>
 
-<!-- ORARIO CORSI -->
 <section class="py-16 sm:py-24">
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 <div class="text-center">
@@ -173,22 +167,7 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
 </thead>
 <tbody class="divide-y divide-primary/10 bg-white dark:bg-background-dark" id="classes-table">
 <tr>
-<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">Hatha Yoga</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Lunedì</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">18:00</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Elena</td>
-</tr>
-<tr>
-<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">Vinyasa Yoga</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Martedì</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">19:30</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Davide</td>
-</tr>
-<tr>
-<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">Yin Yoga</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Mercoledì</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">20:00</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Chiara</td>
+<td colspan="4" class="px-6 py-4 text-center text-sm text-slate-600 dark:text-slate-400">Caricamento lezioni...</td>
 </tr>
 </tbody>
 </table>
@@ -203,7 +182,6 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
 
 </main>
 
-<!-- FOOTER -->
 <footer class="border-t border-primary/20 bg-white dark:bg-background-dark">
 <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 <div class="flex flex-col items-center gap-8 text-center">
@@ -231,12 +209,10 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
 
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-<!-- Configurazione Firebase -->
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyCrRemHD-6e3k1TClTxrT7UTsC8paS4Vr8",
@@ -249,12 +225,57 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
   
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-  const auth = firebase.auth();
   
   console.log('Firebase connesso con successo!');
+
+  async function loadHomepageContent() {
+    try {
+      const homepageDoc = await db.collection('settings').doc('homepage').get();
+      if (homepageDoc.exists) {
+        const data = homepageDoc.data();
+        document.getElementById('hero-title').textContent = data.title;
+        document.getElementById('hero-subtitle').textContent = data.subtitle;
+        document.getElementById('hero-description').textContent = data.description || '';
+      }
+    } catch (error) {
+      console.error("Errore nel caricamento dei contenuti della homepage:", error);
+    }
+  }
+
+  async function loadClassesTable() {
+    const classesTableBody = document.getElementById('classes-table');
+    classesTableBody.innerHTML = '';
+    try {
+      const classesSnapshot = await db.collection('classes').orderBy('createdAt').limit(3).get();
+      if (classesSnapshot.empty) {
+        classesTableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-sm text-slate-600 dark:text-slate-400">Nessuna lezione in programma.</td></tr>';
+        return;
+      }
+      
+      classesSnapshot.forEach(doc => {
+        const classData = doc.data();
+        const row = `
+          <tr>
+            <td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">${classData.name}</td>
+            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">${classData.day}</td>
+            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">${classData.time}</td>
+            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">${classData.instructor}</td>
+          </tr>
+        `;
+        classesTableBody.innerHTML += row;
+      });
+    } catch (error) {
+      console.error("Errore nel caricamento delle lezioni:", error);
+      classesTableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-sm text-red-500">Errore nel caricamento delle lezioni.</td></tr>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    loadHomepageContent();
+    loadClassesTable();
+  });
 </script>
 
-<!-- JavaScript -->
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   if (mobileMenuButton) {
@@ -271,10 +292,6 @@ Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi
         target.scrollIntoView({ behavior: 'smooth' });
       }
     });
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('Centro Yoga Roma - Sito caricato!');
   });
 </script>
 
