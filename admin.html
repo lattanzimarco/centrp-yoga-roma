@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin - Centro Yoga Roma</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+    overflow-x: auto;
+}
+
+.tab {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    min-width: 150px;
+}
+
+.tab:hover {
+    background: #e9ecef;
+}
+
+.tab.active {
+    background: white;
+    border-bottom: 3px solid #667eea;
+    color: #667eea;
+}
+
+.content {
+    padding: 30px;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.item-info {
+    flex: 1;
+    min-width: 250px;
+}
+
+.item-info h4 {
+    margin-bottom: 8px;
+    color: #667eea;
+}
+
+.item-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.actions button {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    opacity: 0.9;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.hidden {
+    display: none;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .actions {
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .actions button {
+        flex: 1;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>Pannello Admin</h1>
+<p>Centro Yoga Roma</p>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab('dashboard')">Dashboard</button>
+<button class="tab" onclick="showTab('classes')">Lezioni</button>
+<button class="tab" onclick="showTab('bookings')">Prenotazioni</button>
+<button class="tab" onclick="showTab('content')">Contenuti</button>
+</div>
+
+<div class="content">
+<!-- Dashboard -->
+<div id="dashboard" class="section active">
+<h2 style="margin-bottom: 20px;">Dashboard</h2>
+
+<div class="stats">
+<div class="stat-card">
+<h3 id="totalClasses">-</h3>
+<p>Lezioni Attive</p>
+</div>
+<div class="stat-card">
+<h3 id="totalBookings">-</h3>
+<p>Prenotazioni Totali</p>
+</div>
+<div class="stat-card">
+<h3 id="todayBookings">-</h3>
+<p>Prenotazioni Oggi</p>
+</div>
+<div class="stat-card">
+<h3 id="availableSpots">-</h3>
+<p>Posti Disponibili</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Azioni Rapide</h3>
+<div style="display: flex; gap: 15px; flex-wrap: wrap;">
+<button class="btn btn-primary" onclick="showTab('classes')">Aggiungi Lezione</button>
+<button class="btn btn-primary" onclick="showTab('bookings')">Vedi Prenotazioni</button>
+<button class="btn btn-primary" onclick="showTab('content')">Modifica Contenuti</button>
+</div>
+</div>
+</div>
+
+<!-- Gestione Lezioni -->
+<div id="classes" class="section">
+<h2 style="margin-bottom: 20px;">Gestione Lezioni</h2>
+
+<div id="classAlert" class="hidden"></div>
+
+<div class="card">
+<h3>Aggiungi Nuova Lezione</h3>
+<form id="classForm">
+<div class="grid-2">
+<div class="form-group">
+<label>Nome Lezione *</label>
+<input type="text" id="className" placeholder="es. Hatha Yoga Mattutino" required>
+</div>
+<div class="form-group">
+<label>Insegnante *</label>
+<input type="text" id="classInstructor" placeholder="es. Maria Rossi" required>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="form-group">
+<label>Giorno *</label>
+<input type="text" id="classDay" placeholder="es. Lunedì e Mercoledì" required>
+</div>
+<div class="form-group">
+<label>Orario *</label>
+<input type="text" id="classTime" placeholder="es. 09:00-10:30" required>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="form-group">
+<label>Livello *</label>
+<select id="classLevel" required>
+<option value="">Seleziona livello</option>
+<option value="Principiante">Principiante</option>
+<option value="Intermedio">Intermedio</option>
+<option value="Avanzato">Avanzato</option>
+<option value="Tutti i livelli">Tutti i livelli</option>
+</select>
+</div>
+<div class="form-group">
+<label>Posti Max *</label>
+<input type="number" id="classSpots" placeholder="es. 15" min="1" required>
+</div>
+</div>
+
+<div class="form-group">
+<label>Prezzo (€) *</label>
+<input type="number" id="classPrice" placeholder="es. 20" min="0" step="0.01" required>
+</div>
+
+<div class="form-group">
+<label>Descrizione</label>
+<textarea id="classDescription" placeholder="Descrizione della lezione..."></textarea>
+</div>
+
+<button type="submit" class="btn btn-primary">Salva Lezione</button>
+</form>
+</div>
+
+<div class="card">
+<h3>Lezioni Attive</h3>
+<div id="classesList" class="loading">Caricamento lezioni...</div>
+</div>
+</div>
+
+<!-- Gestione Prenotazioni -->
+<div id="bookings" class="section">
+<h2 style="margin-bottom: 20px;">Gestione Prenotazioni</h2>
+
+<div class="card">
+<h3>Prenotazioni Recenti</h3>
+<div id="bookingsList" class="loading">Caricamento prenotazioni...</div>
+</div>
+</div>
+
+<!-- Gestione Contenuti -->
+<div id="content" class="section">
+<h2 style="margin-bottom: 20px;">Gestione Contenuti Sito</h2>
+
+<div id="contentAlert" class="hidden"></div>
+
+<div class="card">
+<h3>Homepage</h3>
+<form id="homepageForm">
+<div class="form-group">
+<label>Titolo Principale</label>
+<input type="text" id="homeTitle" value="Centro Yoga Roma - Trova il tuo equilibrio">
+</div>
+<div class="form-group">
+<label>Sottotitolo</label>
+<textarea id="homeSubtitle">Esplora la tua pratica di yoga nel cuore di Roma. Offriamo una varietà di corsi per tutti i livelli.</textarea>
+</div>
+<button type="submit" class="btn btn-primary">Salva Homepage</button>
+</form>
+</div>
+
+<div class="card">
+<h3>Informazioni Contatto</h3>
+<form id="contactForm">
+<div class="grid-2">
+<div class="form-group">
+<label>Indirizzo</label>
+<input type="text" id="contactAddress" value="Via dei Fiori, 12, Roma">
+</div>
+<div class="form-group">
+<label>Telefono</label>
+<input type="tel" id="contactPhone" value="+39 06 1234 5678">
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="contactEmail" value="info@centroyogaroma.it">
+</div>
+<div class="form-group">
+<label>Orari Apertura</label>
+<input type="text" id="contactHours" value="Lun-Ven: 8:00-20:00">
+</div>
+</div>
+<button type="submit" class="btn btn-primary">Salva Contatti</button>
+</form>
+</div>
+
+<div class="card">
+<h3>Prezzi</h3>
+<form id="pricingForm">
+<div class="grid-2">
+<div class="form-group">
+<label>Lezione Singola (€)</label>
+<input type="number" id="priceSingle" value="20" step="0.01">
+</div>
+<div class="form-group">
+<label>Abbonamento Mensile (€)</label>
+<input type="number" id="priceMonthly" value="80" step="0.01">
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label>Abbonamento Trimestrale (€)</label>
+<input type="number" id="priceQuarterly" value="210" step="0.01">
+</div>
+<div class="form-group">
+<label>Pacchetto 10 Lezioni (€)</label>
+<input type="number" id="price10Pack" value="180" step="0.01">
+</div>
+</div>
+<button type="submit" class="btn btn-primary">Salva Prezzi</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+// Configurazione Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyCrRemHD-6e3k1TClTxrT7UTsC8paS4Vr8",
+    authDomain: "centro-yoga-roma.firebaseapp.com",
+    projectId: "centro-yoga-roma",
+    storageBucket: "centro-yoga-roma.firebasestorage.app",
+    messagingSenderId: "1057044210787",
+    appId: "1:1057044210787:web:1b84fbc8f6f081da0f4456"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Gestione Tab
+function showTab(tabName) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+    
+    if (tabName === 'classes') loadClasses();
+    if (tabName === 'bookings') loadBookings();
+    if (tabName === 'dashboard') loadDashboard();
+}
+
+function showAlert(elementId, message, type) {
+    const alertDiv = document.getElementById(elementId);
+    alertDiv.className = `alert alert-${type}`;
+    alertDiv.textContent = message;
+    alertDiv.classList.remove('hidden');
+    setTimeout(() => alertDiv.classList.add('hidden'), 3000);
+}
+
+// GESTIONE LEZIONI
+document.getElementById('classForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const classData = {
+        name: document.getElementById('className').value,
+        instructor: document.getElementById('classInstructor').value,
+        day: document.getElementById('classDay').value,
+        time: document.getElementById('classTime').value,
+        level: document.getElementById('classLevel').value,
+        maxSpots: parseInt(document.getElementById('classSpots').value),
+        availableSpots: parseInt(document.getElementById('classSpots').value),
+        price: parseFloat(document.getElementById('classPrice').value),
+        description: document.getElementById('classDescription').value,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    
+    try {
+        await db.collection('classes').add(classData);
+        showAlert('classAlert', 'Lezione aggiunta con successo!', 'success');
+        this.reset();
+        loadClasses();
+    } catch (error) {
+        showAlert('classAlert', 'Errore: ' + error.message, 'error');
+    }
+});
+
+async function loadClasses() {
+    const list = document.getElementById('classesList');
+    list.innerHTML = '<div class="loading">Caricamento...</div>';
+    
+    try {
+        const snapshot = await db.collection('classes').get();
+        
+        if (snapshot.empty) {
+            list.innerHTML = '<p style="text-align:center; color:#666;">Nessuna lezione trovata. Aggiungi la prima lezione!</p>';
+            return;
+        }
+        
+        list.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `
+                <div class="item-info">
+                    <h4>${data.name}</h4>
+                    <p><strong>Insegnante:</strong> ${data.instructor}</p>
+                    <p><strong>Orario:</strong> ${data.day}, ${data.time}</p>
+                    <p><strong>Livello:</strong> ${data.level} | <strong>Posti:</strong> ${data.availableSpots}/${data.maxSpots} | <strong>Prezzo:</strong> €${data.price}</p>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-danger" onclick="deleteClass('${doc.id}')">Elimina</button>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    } catch (error) {
+        list.innerHTML = '<p style="color:red;">Errore nel caricamento: ' + error.message + '</p>';
+    }
+}
+
+async function deleteClass(id) {
+    if (!confirm('Sei sicuro di voler eliminare questa lezione?')) return;
+    
+    try {
+        await db.collection('classes').doc(id).delete();
+        showAlert('classAlert', 'Lezione eliminata!', 'success');
+        loadClasses();
+    } catch (error) {
+        showAlert('classAlert', 'Errore: ' + error.message, 'error');
+    }
+}
+
+// GESTIONE PRENOTAZIONI
+async function loadBookings() {
+    const list = document.getElementById('bookingsList');
+    list.innerHTML = '<div class="loading">Caricamento...</div>';
+    
+    try {
+        const snapshot = await db.collection('bookings').orderBy('bookingDate', 'desc').limit(20).get();
+        
+        if (snapshot.empty) {
+            list.innerHTML = '<p style="text-align:center; color:#666;">Nessuna prenotazione trovata.</p>';
+            return;
+        }
+        
+        list.innerHTML = '';
+        for (const doc of snapshot.docs) {
+            const data = doc.data();
+            const classDoc = await db.collection('classes').doc(data.classId).get();
+            const className = classDoc.exists ? classDoc.data().name : 'Lezione non trovata';
+            
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `
+                <div class="item-info">
+                    <h4>${data.userName}</h4>
+                    <p><strong>Email:</strong> ${data.userEmail} | <strong>Tel:</strong> ${data.userPhone || 'N/A'}</p>
+                    <p><strong>Lezione:</strong> ${className}</p>
+                    <p><strong>Stato:</strong> ${data.status === 'confirmed' ? '✓ Confermata' : '⏳ In attesa'}</p>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-danger" onclick="deleteBooking('${doc.id}', '${data.classId}')">Cancella</button>
+                </div>
+            `;
+            list.appendChild(div);
+        }
+    } catch (error) {
+        list.innerHTML = '<p style="color:red;">Errore: ' + error.message + '</p>';
+    }
+}
+
+async function deleteBooking(bookingId, classId) {
+    if (!confirm('Cancellare questa prenotazione?')) return;
+    
+    try {
+        await db.collection('bookings').doc(bookingId).delete();
+        await db.collection('classes').doc(classId).update({
+            availableSpots: firebase.firestore.FieldValue.increment(1)
+        });
+        loadBookings();
+        loadDashboard();
+    } catch (error) {
+        alert('Errore: ' + error.message);
+    }
+}
+
+// DASHBOARD
+async function loadDashboard() {
+    try {
+        const classesSnap = await db.collection('classes').get();
+        const bookingsSnap = await db.collection('bookings').get();
+        
+        document.getElementById('totalClasses').textContent = classesSnap.size;
+        document.getElementById('totalBookings').textContent = bookingsSnap.size;
+        
+        const today = new Date().toDateString();
+        const todayBookings = bookingsSnap.docs.filter(doc => {
+            const bookingDate = doc.data().bookingDate?.toDate();
+            return bookingDate && bookingDate.toDateString() === today;
+        });
+        document.getElementById('todayBookings').textContent = todayBookings.length;
+        
+        let totalSpots = 0;
+        classesSnap.forEach(doc => {
+            totalSpots += doc.data().availableSpots || 0;
+        });
+        document.getElementById('availableSpots').textContent = totalSpots;
+    } catch (error) {
+        console.error('Errore dashboard:', error);
+    }
+}
+
+// GESTIONE CONTENUTI
+document.getElementById('homepageForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    try {
+        await db.collection('settings').doc('homepage').set({
+            title: document.getElementById('homeTitle').value,
+            subtitle: document.getElementById('homeSubtitle').value,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showAlert('contentAlert', 'Homepage aggiornata!', 'success');
+    } catch (error) {
+        showAlert('contentAlert', 'Errore: ' + error.message, 'error');
+    }
+});
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    try {
+        await db.collection('settings').doc('contact').set({
+            address: document.getElementById('contactAddress').value,
+            phone: document.getElementById('contactPhone').value,
+            email: document.getElementById('contactEmail').value,
+            hours: document.getElementById('contactHours').value,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showAlert('contentAlert', 'Contatti aggiornati!', 'success');
+    } catch (error) {
+        showAlert('contentAlert', 'Errore: ' + error.message, 'error');
+    }
+});
+
+document.getElementById('pricingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    try {
+        await db.collection('settings').doc('pricing').set({
+            single: parseFloat(document.getElementById('priceSingle').value),
+            monthly: parseFloat(document.getElementById('priceMonthly').value),
+            quarterly: parseFloat(document.getElementById('priceQuarterly').value),
+            pack10: parseFloat(document.getElementById('price10Pack').value),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showAlert('contentAlert', 'Prezzi aggiornati!', 'success');
+    } catch (error) {
+        showAlert('contentAlert', 'Errore: ' + error.message, 'error');
+    }
+});
+
+// Carica dashboard all'avvio
+loadDashboard();
+</script>
+
+</body>
+</html>
